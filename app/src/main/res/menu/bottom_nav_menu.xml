@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/link"
+        android:enabled="true"
+        android:icon="@drawable/ic_link"
+        android:title="@string/link" />
+    <item
+        android:id="@+id/courses"
+        android:icon="@drawable/ic_courses"
+        android:title="@string/courses" />
+
+    <item
+        android:title=""
+        />
+
+    <item
+        android:id="@+id/campaign"
+        android:icon="@drawable/ic_campaign"
+        android:title="@string/campaign" />
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/profile" />
+
+</menu>

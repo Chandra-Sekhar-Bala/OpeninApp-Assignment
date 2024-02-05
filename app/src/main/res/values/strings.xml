@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">OpeninApp</string>
+    <string name="link">Link</string>
+    <string name="courses">Courses</string>
+    <string name="campaign">Campaign</string>
+    <string name="profile">Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="chandra_sekhar">Chandra Sekhar 👋</string>
 </resources>
