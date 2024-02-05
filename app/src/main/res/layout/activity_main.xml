@@ -11,27 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:fabAlignmentMode="center"
-        app:fabCradleMargin="@dimen/_5sdp"
-        app:fabCradleRoundedCornerRadius="@dimen/_20sdp"
-        app:fabCradleVerticalOffset="@dimen/_3sdp">
+        app:fabAlignmentMode="center">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
+            app:itemIconTint="@drawable/bottom_nav_item_tint"
+            app:itemTextColor="@drawable/bottom_nav_item_tint"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav_menu" />
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/light_blue"
         android:src="@drawable/ic_add"
-        app:borderWidth="0dp"
+        android:layout_marginBottom="@dimen/_5sdp"
         app:layout_anchor="@id/bottom_appbar"
         app:tint="@color/white" />
 
