@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/style_cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -29,7 +30,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_6sdp"
             android:maxLines="1"
-            android:text="Sample link name"
+            tools:text="Sample link name"
             android:textColor="@color/black"
             android:textSize="@dimen/_14ssp"
             app:layout_constraintEnd_toStartOf="@+id/txt_linkClicks"
@@ -41,7 +42,7 @@
             style="@style/medium_black_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2333"
+            tools:text="2333"
             android:textSize="@dimen/_16ssp"
             app:layout_constraintEnd_toEndOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="@+id/textView2"
@@ -86,15 +87,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_3sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
                 android:maxLines="1"
-                android:text="https://samplelink.oia.bio/ashd..."
+                android:layout_marginEnd="@dimen/_6sdp"
+                tools:text="https://samplelink.oia.bio/ashd..."
                 android:textColor="@color/light_blue"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintEnd_toStartOf="@+id/img_copyBtn"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.466" />
 
             <ImageView
                 android:id="@+id/img_copyBtn"

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.openinapp.task.helper.CONSTANTS
-import com.openinapp.task.helper.logthis
+import com.openinapp.task.helper.logThis
 import com.openinapp.task.model.LinkResponse
 import com.openinapp.task.repo.network.LinkApi
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +24,7 @@ constructor(
     @Named(CONSTANTS.API_KEY) private val apiToken: String
 ) : ViewModel() {
 
-    // greet
+    // greet message
     val greetMessage: String = getGreeting(System.currentTimeMillis())
 
     // response
@@ -32,13 +32,13 @@ constructor(
     val response: LiveData<LinkResponse> get() = _response
 
     fun getDataFromInternet() {
-        logthis("Starting Engine ....\n Token : $apiToken")
+        logThis("Starting Engine ....\n Token : $apiToken")
         viewModelScope.launch {
             try {
                 _response.postValue(linkApi.getLinkData(apiToken))
-                logthis("Success getting data ${_response.value?.statusCode}")
+                logThis("Success getting data ${_response.value?.statusCode}")
             } catch (e: Exception) {
-                logthis(e.message.toString())
+                logThis(e.message.toString())
             }
         }
     }

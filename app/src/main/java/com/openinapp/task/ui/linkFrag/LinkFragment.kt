@@ -7,11 +7,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.chip.Chip
+import com.openinapp.task.R
 import com.openinapp.task.databinding.FragmentLinkBinding
 import com.openinapp.task.helper.CONSTANTS
-import com.openinapp.task.helper.logthis
+import com.openinapp.task.helper.logThis
+import com.openinapp.task.model.Link
+import com.openinapp.task.model.Screen
 import dagger.hilt.android.AndroidEntryPoint
 import java.net.URLEncoder
 
@@ -23,9 +28,13 @@ class LinkFragment : Fragment() {
     private val shf by lazy {
         requireContext().getSharedPreferences(CONSTANTS.WP, Context.MODE_PRIVATE)
     }
-
     private val adapter by lazy { LinkAdapter() }
-
+    private val chipList =
+        listOf(
+            R.id.chip_top,
+            R.id.chip_recent,
+        )
+    private val rcyData = mutableListOf<List<Link>>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,9 +54,12 @@ class LinkFragment : Fragment() {
 
         viewModel.response.observe(viewLifecycleOwner) { data ->
 
-            adapter.submitList(data.data.topLinks)
+            rcyData.add(data.data.topLinks)
+            rcyData.add(data.data.recentLinks)
+            // Setting the TopLink by default
+            setRcyScreen(Screen.TOP)
 
-            logthis("Data on UI : $data")
+            logThis("Data on UI : $data")
             binding.layoutStats.apply {
 
                 txtTdyClicks.text = data.todayClicks.toString()
@@ -74,7 +86,26 @@ class LinkFragment : Fragment() {
         binding.txtFaq.setOnClickListener {
             takeOnWeb()
         }
+        binding.chipGroup.setOnCheckedStateChangeListener { _, chipIds ->
+            setChip(chipIds)
+        }
     }
+
+    private fun setChip(chipIds: List<Int>) {
+        val selectedChipId = chipIds[0]
+        val otherChipId = if (selectedChipId == chipList[0]) chipList[1] else chipList[0]
+
+        view?.findViewById<Chip>(selectedChipId)?.apply {
+            setChipBackgroundColorResource(R.color.chip_active)
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        }
+        setRcyScreen(if (selectedChipId == chipList[0]) Screen.TOP else Screen.RECENT)
+        view?.findViewById<Chip>(otherChipId)?.apply {
+            setChipBackgroundColorResource(R.color.white)
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.chip_inactive))
+        }
+    }
+
 
     private fun takeOnWeb() {
         val faqUrl = "https://openinapp.com/faq"
@@ -95,5 +126,14 @@ class LinkFragment : Fragment() {
         val intent = Intent(Intent.ACTION_VIEW, uri)
         startActivity(intent)
 
+    }
+
+    private fun setRcyScreen(pos: Screen) {
+        adapter.submitList(
+            when (pos) {
+                Screen.TOP -> rcyData[0]
+                Screen.RECENT -> rcyData[1]
+            }
+        )
     }
 }
