@@ -199,7 +199,7 @@
                 android:background="@drawable/bg_round_border"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="@dimen/_8sdp">
+                android:padding="@dimen/_6sdp">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -212,7 +212,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/view_all_links"
-                    android:textSize="@dimen/_17ssp"
+                    android:textSize="@dimen/_18ssp"
                     />
 
             </LinearLayout>
