@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="medium_text_style">
+        <item name="android:textSize">@dimen/_16ssp</item>
+        <item name="android:fontFamily">@font/figtree_medium</item>
+    </style>
+
+    <style name="medium_black_text_style">
+        <item name="android:textSize">@dimen/_20ssp</item>
+        <item name="android:fontFamily">@font/figtree_medium</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="style_cardView">
+        <item name="cardCornerRadius">@dimen/_6sdp</item>
+        <item name="android:layout_marginBottom">@dimen/_6sdp</item>
+
+    </style>
+
+    <style name="stats_padding">
+        <item name="android:paddingStart">@dimen/_14sdp</item>
+        <item name="android:paddingEnd">@dimen/_14sdp</item>
+        <item name="android:paddingTop">@dimen/_10sdp</item>
+        <item name="android:paddingBottom">@dimen/_14sdp</item>
+    </style>
+
+    <style name="Colors_Widget.MaterialComponents.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/white</item>
+        <item name="chipStartPadding">@dimen/_8sdp</item>
+        <item name="chipEndPadding">@dimen/_8sdp</item>
+        <item name="android:fontFamily">@font/figtree_bold</item>
+        <item name="android:textSize">@dimen/_15ssp</item>
+        <item name="android:textColor">@color/chip_inactive</item>
+    </style>
+
+
+</resources>

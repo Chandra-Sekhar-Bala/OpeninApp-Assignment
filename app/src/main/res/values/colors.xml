@@ -6,4 +6,8 @@
     <color name="light_blue">#0E6FFF</color>
     <color name="unselected_tint_color">#999ca0</color>
     <color name="selected_tint_color">#000000</color>
+    <color name="light_grey">#d8d8d8</color>
+    <color name="chip_inactive">#999ca0</color>
+    <color name="chip_active">#0e6fff</color>
+    <color name="light_green">#e0f1e3</color>
 </resources>

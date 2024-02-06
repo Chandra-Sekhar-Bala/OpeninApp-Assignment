@@ -4,10 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:scrollbarSize="0dp"
+    android:padding="0dp"
+    android:layout_margin="0dp"
     android:background="@color/light_blue"
     tools:context=".ui.linkFrag.LinkFragment">
 
     <LinearLayout
+        android:layout_marginBottom="@dimen/_20sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -43,35 +47,231 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="900dp"
-            android:background="@drawable/bg_white"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_round_crop"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_14sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
+                style="@style/medium_text_style"
                 android:id="@+id/txt_greet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginTop="@dimen/_25sdp"
-                android:fontFamily="@font/figtree_medium"
-                android:text="Good Morning"
-                android:textSize="@dimen/_16ssp" />
+                android:text="Good Morning" />
 
             <TextView
+                style="@style/medium_black_text_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginTop="@dimen/_4sdp"
-                android:fontFamily="@font/figtree_medium"
-                android:text="@string/chandra_sekhar"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_20ssp" />
+                android:text="@string/chandra_sekhar" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    style="@style/medium_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Overview"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:id="@+id/txt_graphDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="@drawable/bg_round_border"
+                    android:drawableEnd="@drawable/ic_clock"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:fontFamily="@font/figtree_medium"
+                    android:padding="@dimen/_6sdp"
+                    android:text="22 Aug - 23 Sept"
+                    android:textAlignment="textEnd"
+                    android:textSize="@dimen/_12ssp" />
+            </LinearLayout>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart_lineChart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_310sdp"
+                android:layout_marginTop="@dimen/_4sdp" />
+
+            <include
+                android:id="@+id/layout_stats"
+                layout="@layout/stats_layout" />
+
+            <LinearLayout
+                android:id="@+id/txt_viewAnalytics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_round_border"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/_6sdp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_7sdp"
+                    android:src="@drawable/ic_arrow" />
+
+                <TextView
+                    style="@style/medium_black_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/view_analytics"
+                    android:textSize="@dimen/_16ssp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:background="@drawable/bg_white_round"
+                android:orientation="horizontal">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    app:chipSpacingHorizontal="@dimen/_6sdp"
+                    app:singleLine="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_top"
+                        style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/top_links"
+                        android:textColor="@color/white"
+                        app:chipBackgroundColor="@color/chip_active" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_recent"
+                        style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/recent_links" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:src="@drawable/ic_search" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcyView"
+                tools:listitem="@layout/item_links"
+                android:layout_width="match_parent"
+                tools:itemCount="2"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                />
+
+            <LinearLayout
+                android:id="@+id/txt_viewAllLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_round_border"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/_8sdp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_7sdp"
+                    android:src="@drawable/ic_link" />
+
+                <TextView
+                    style="@style/medium_black_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/view_all_links"
+                    android:textSize="@dimen/_17ssp"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/txt_talkOnWp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_light_green_round"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_14sdp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:src="@drawable/ic_whatsapp" />
+
+                <TextView
+                    style="@style/medium_black_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_13sdp"
+                    android:fontFamily="@font/figtree_semibold"
+                    android:text="@string/talk_with_us"
+                    android:textSize="@dimen/_16ssp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/txt_faq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:background="@drawable/bg_light_green_round"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_14sdp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:src="@drawable/ic_faq_" />
+
+                <TextView
+                    style="@style/medium_black_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_13sdp"
+                    android:fontFamily="@font/figtree_semibold"
+                    android:text="@string/frequently_asked_questions"
+                    android:textSize="@dimen/_16ssp" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
 
     </LinearLayout>
 
