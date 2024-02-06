@@ -35,16 +35,16 @@ data class LinkResponse(
 
 data class Data(
     @SerializedName("recent_links")
-    val recentLinks: List<RecentLink>,
+    val recentLinks: List<Link>,
     @SerializedName("top_links")
-    val topLinks: List<TopLink>,
+    val topLinks: List<Link>,
     @SerializedName("favourite_links")
     val favouriteLinks: List<Any>,
     @SerializedName("overall_url_chart")
     val overallUrlChart: Map<String, Int>
 )
 
-data class RecentLink(
+data class Link(
     @SerializedName("url_id")
     val urlId: Int,
     @SerializedName("web_link")
@@ -67,37 +67,6 @@ data class RecentLink(
     val domainId: String,
     @SerializedName("url_prefix")
     val urlPrefix: Any?,
-    @SerializedName("url_suffix")
-    val urlSuffix: String,
-    @SerializedName("app")
-    val app: String,
-    @SerializedName("is_favourite")
-    val isFavourite: Boolean
-)
-
-data class TopLink(
-    @SerializedName("url_id")
-    val urlId: Int,
-    @SerializedName("web_link")
-    val webLink: String,
-    @SerializedName("smart_link")
-    val smartLink: String,
-    @SerializedName("title")
-    val title: String,
-    @SerializedName("total_clicks")
-    val totalClicks: Int,
-    @SerializedName("original_image")
-    val originalImage: String,
-    @SerializedName("thumbnail")
-    val thumbnail: Any?,
-    @SerializedName("times_ago")
-    val timesAgo: String,
-    @SerializedName("created_at")
-    val createdAt: String,
-    @SerializedName("domain_id")
-    val domainId: String,
-    @SerializedName("url_prefix")
-    val urlPrefix: String,
     @SerializedName("url_suffix")
     val urlSuffix: String,
     @SerializedName("app")

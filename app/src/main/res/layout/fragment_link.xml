@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginTop="@dimen/_25sdp"
-                android:text="Good Morning" />
+                tools:text="Good Morning" />
 
             <TextView
                 style="@style/medium_black_text_style"
@@ -98,7 +98,7 @@
                     android:drawablePadding="@dimen/_4sdp"
                     android:fontFamily="@font/figtree_medium"
                     android:padding="@dimen/_6sdp"
-                    android:text="22 Aug - 23 Sept"
+                    android:text="@string/_2_jan_6_feb"
                     android:textAlignment="textEnd"
                     android:textSize="@dimen/_12ssp" />
             </LinearLayout>
@@ -184,9 +184,10 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcyView"
+                android:layout_marginTop="@dimen/_10sdp"
                 tools:listitem="@layout/item_links"
                 android:layout_width="match_parent"
-                tools:itemCount="2"
+                android:nestedScrollingEnabled="false"
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 />

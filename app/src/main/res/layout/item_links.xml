@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txt_linkName"
+            android:id="@+id/txt_linkTitle"
             style="@style/medium_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -41,12 +41,11 @@
             style="@style/medium_black_text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginEnd="@dimen/_6sdp"
             android:text="2333"
             android:textSize="@dimen/_16ssp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/txt_linkName" />
+            app:layout_constraintEnd_toEndOf="@+id/textView2"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="@id/txt_linkTitle" />
 
         <TextView
             android:id="@+id/txt_date"
@@ -56,17 +55,18 @@
             android:layout_marginTop="@dimen/_6sdp"
             android:text="22 Aug 2022"
             android:textSize="@dimen/_13ssp"
-            app:layout_constraintStart_toStartOf="@+id/txt_linkName"
-            app:layout_constraintTop_toBottomOf="@+id/txt_linkName" />
+            app:layout_constraintStart_toStartOf="@+id/txt_linkTitle"
+            app:layout_constraintTop_toBottomOf="@+id/txt_linkTitle" />
 
         <TextView
+            android:id="@+id/textView2"
             style="@style/medium_text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_4sdp"
             android:text="@string/clicks"
             android:textSize="@dimen/_13ssp"
-            app:layout_constraintEnd_toEndOf="@+id/txt_linkClicks"
-            app:layout_constraintStart_toStartOf="@+id/txt_linkClicks"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/txt_date" />
 
 

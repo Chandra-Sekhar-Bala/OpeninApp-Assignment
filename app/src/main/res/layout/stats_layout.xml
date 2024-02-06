@@ -1,6 +1,7 @@
 <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:scrollbarSize="0dp">
 
     <LinearLayout
@@ -25,12 +26,13 @@
                     android:src="@drawable/ic_click" />
 
                 <TextView
+                    android:id="@+id/txt_tdyClicks"
                     style="@style/medium_black_text_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="123"
+                    tools:text="123"
                     android:textSize="@dimen/_14ssp" />
 
                 <TextView
@@ -70,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="123"
+                    android:text="@string/n_a"
                     android:textSize="@dimen/_14ssp" />
 
                 <TextView
@@ -109,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="123"
+                    android:text="@string/n_a"
                     android:textSize="@dimen/_14ssp" />
 
                 <TextView

@@ -76,5 +76,9 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0"
 
+    // Image loading
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+
 
 }
