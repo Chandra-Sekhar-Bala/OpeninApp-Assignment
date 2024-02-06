@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/linkFragment">
+
+    <fragment
+        android:id="@+id/linkFragment"
+        android:name="com.openinapp.task.ui.linkFrag.LinkFragment"
+        android:label="fragment_link"
+        tools:layout="@layout/fragment_link" />
+    <fragment
+        android:id="@+id/campaignFragment"
+        android:name="com.openinapp.task.ui.campaignFrag.CampaignFragment"
+        android:label="fragment_campaign"
+        tools:layout="@layout/fragment_campaign" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.openinapp.task.ui.profileFrag.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/coursesFragment"
+        android:name="com.openinapp.task.ui.coursesFrag.CoursesFragment"
+        android:label="fragment_courses"
+        tools:layout="@layout/fragment_courses" />
+</navigation>

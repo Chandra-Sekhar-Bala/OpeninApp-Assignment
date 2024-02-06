@@ -4,7 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.MainActivity">
+
+    <fragment
+        android:id="@+id/navHost_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_appbar"
@@ -16,12 +25,14 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            app:itemIconTint="@drawable/bottom_nav_item_tint"
-            app:itemTextColor="@drawable/bottom_nav_item_tint"
+            app:itemIconTint="@color/bottom_nav_item_tint_color"
+            app:itemTextColor="@color/bottom_nav_item_tint_color"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav_menu" />
+
+
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
