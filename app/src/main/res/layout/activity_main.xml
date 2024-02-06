@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/bg_color"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".ui.MainActivity">
 
     <fragment
@@ -20,7 +20,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:fabAlignmentMode="center">
+        app:fabAlignmentMode="center"
+        app:fabAnchorMode="embed"
+        app:backgroundTint="@color/white"
+        >
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavView"
@@ -41,8 +44,11 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/light_blue"
         android:src="@drawable/ic_add"
-        android:layout_marginBottom="@dimen/_5sdp"
         app:layout_anchor="@id/bottom_appbar"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        app:backgroundTintMode="src_over"
+        app:borderWidth="0dp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        app:fabSize="normal"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

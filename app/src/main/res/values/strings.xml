@@ -8,4 +8,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dashboard">Dashboard</string>
     <string name="chandra_sekhar">Chandra Sekhar 👋</string>
+    <string name="hello_from_courses">Hello from Courses 👋</string>
+    <string name="hello_from_campaign">Hello from Campaign 👋</string>
+    <string name="hello_from_profile">Hello from Profile 👋</string>
 </resources>

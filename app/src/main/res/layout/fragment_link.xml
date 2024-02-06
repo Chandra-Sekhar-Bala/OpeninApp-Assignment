@@ -14,10 +14,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/top_constrain"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways">
 
             <TextView
                 android:id="@+id/textView"
@@ -29,24 +30,20 @@
                 android:fontFamily="@font/figtree_semibold"
                 android:text="@string/dashboard"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_20ssp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="@dimen/_20ssp" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:src="@drawable/ic_setting"
-                app:layout_constraintBottom_toBottomOf="@+id/textView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_gravity="end" />
+        </androidx.appcompat.widget.Toolbar>
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_500sdp"
+            android:layout_height="900dp"
             android:background="@drawable/bg_white"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_14sdp"
@@ -72,7 +69,6 @@
                 android:text="@string/chandra_sekhar"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_20ssp" />
-
 
         </LinearLayout>
 
