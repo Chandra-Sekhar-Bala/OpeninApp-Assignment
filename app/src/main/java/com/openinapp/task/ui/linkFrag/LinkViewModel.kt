@@ -12,7 +12,6 @@ import com.openinapp.task.model.LinkResponse
 import com.openinapp.task.repo.network.LinkApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
@@ -45,11 +44,11 @@ constructor(
     fun getDataFromInternet() {
         _loading.value = LOAD.LOADING
         logThis("Starting Engine ....\n Token : $apiToken")
+
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO) {
-                    val data = async { linkApi.getLinkData(apiToken) }
-                    val item = data.await()
+                    val item = linkApi.getLinkData(apiToken)
                     _response.postValue(item)
                     logThis("Success getting data ${_response.value?.data?.overallUrlChart}")
                 }
@@ -61,7 +60,8 @@ constructor(
         }
     }
 
-// Make up the line data upto
+
+    // Make up the line data upto
     private fun sortLineData() {
         _response.value?.data?.overallUrlChart?.let { overallUrlChart ->
             // Get entries for January and February

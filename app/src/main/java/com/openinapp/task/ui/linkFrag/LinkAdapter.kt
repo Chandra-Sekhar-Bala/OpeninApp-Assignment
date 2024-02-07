@@ -15,7 +15,6 @@ import com.squareup.picasso.Picasso
 
 class LinkAdapter : ListAdapter<Link, LinkAdapter.ViewHolder>(diffUtil) {
     private lateinit var context: Context
-    var onItemClick: ((String) -> Unit)? = null
 
     inner class ViewHolder(private val binding: ItemLinksBinding) :
         RecyclerView.ViewHolder(binding.root) {
