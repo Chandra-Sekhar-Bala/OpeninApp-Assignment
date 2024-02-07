@@ -23,6 +23,7 @@ import com.openinapp.task.databinding.FragmentLinkBinding
 import com.openinapp.task.helper.CONSTANTS
 import com.openinapp.task.helper.logThis
 import com.openinapp.task.model.Link
+import com.openinapp.task.model.LinkResponse
 import com.openinapp.task.model.Screen
 import dagger.hilt.android.AndroidEntryPoint
 import java.net.URLEncoder
@@ -53,6 +54,7 @@ class LinkFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.getDataFromInternet()
         binding.rcyView.adapter = adapter
 
         setupOnClickListener()
@@ -60,38 +62,49 @@ class LinkFragment : Fragment() {
         setupLineChart()
         binding.txtGreet.text = viewModel.greetMessage
 
-
     }
 
     private fun observeData() {
         viewModel.lineChartData.observe(viewLifecycleOwner) {
             showLineChart(it)
         }
-        viewModel.response.observe(viewLifecycleOwner) { data ->
 
-            rcyData.add(data.data.topLinks)
-            rcyData.add(data.data.recentLinks)
-            // Setting the TopLink by default
-            setRcyScreen(Screen.TOP)
+        viewModel.dateTime.observe(viewLifecycleOwner) {
+            binding.txtGraphDate.text = it
+        }
+        viewModel.response.observe(viewLifecycleOwner) {
+            showDataOnScreen(it)
+        }
+    }
 
-            logThis("Data on UI : $data")
-            binding.layoutStats.apply {
+    /**
+     * Sowing data on recyclerview and saving the whatsapp number if not saved earlier!
+     * */
+    private fun showDataOnScreen(data: LinkResponse) {
 
-                txtTdyClicks.text = data.todayClicks.toString()
-                if (data.topLocation.isNotEmpty())
-                    txtLocation.text = data.topLocation
-                if (data.topSource.isNotEmpty())
-                    txtSources.text = data.topSource
-            }
-            if (shf?.getString(CONSTANTS.WP, "")!!.isEmpty()) {
-                shf.edit().apply {
-                    putString(CONSTANTS.WP_NO, data.supportWhatsappNumber)
-                    apply()
-                }
+        rcyData.add(data.data.topLinks)
+        rcyData.add(data.data.recentLinks)
+        // Setting the TopLink by default
+        setRcyScreen(Screen.TOP)
+
+        logThis("Data on UI : $data")
+        binding.layoutStats.apply {
+
+            txtTdyClicks.text = data.todayClicks.toString()
+            if (data.topLocation.isNotEmpty())
+                txtLocation.text = data.topLocation
+            if (data.topSource.isNotEmpty())
+                txtSources.text = data.topSource
+        }
+        if (shf?.getString(CONSTANTS.WP, "")!!.isEmpty()) {
+            shf.edit().apply {
+                putString(CONSTANTS.WP_NO, data.supportWhatsappNumber)
+                apply()
             }
         }
     }
 
+    // Showing the Graph data on screen!
     private fun showLineChart(entries: List<Entry>?) {
 
         val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.fade_blue)

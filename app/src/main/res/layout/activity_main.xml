@@ -27,7 +27,6 @@
             android:layout_height="wrap_content"
             app:backgroundTint="@color/white"
             app:fabAlignmentMode="center"
-            app:fabAnchorMode="embed"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="BottomAppBar">
 
@@ -48,7 +47,7 @@
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:backgroundTint="@color/light_blue"
             android:src="@drawable/ic_add"
             app:backgroundTintMode="src_over"
@@ -56,8 +55,9 @@
             app:fabSize="normal"
             app:layout_anchor="@id/bottom_appbar"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/bottom_appbar"
-            app:layout_constraintStart_toStartOf="@id/bottom_appbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/navHost_fragment"
             app:tint="@color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

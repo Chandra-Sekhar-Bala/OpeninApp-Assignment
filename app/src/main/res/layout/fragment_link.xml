@@ -103,7 +103,7 @@
                         android:drawablePadding="@dimen/_4sdp"
                         android:fontFamily="@font/figtree_medium"
                         android:padding="@dimen/_6sdp"
-                        android:text="@string/_2_jan_6_feb"
+                        tools:text="@string/_8_jan_7_feb"
                         android:textAlignment="textEnd"
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintEnd_toEndOf="parent"

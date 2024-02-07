@@ -38,11 +38,9 @@ constructor(
     private val _lineChartData = MutableLiveData<List<Entry>?>()
     val lineChartData: LiveData<List<Entry>?> get() = _lineChartData
 
-    init {
-        getDataFromInternet()
-    }
+    var dateTime = MutableLiveData<String>()
 
-    private fun getDataFromInternet() {
+    fun getDataFromInternet() {
         logThis("Starting Engine ....\n Token : $apiToken")
         viewModelScope.launch {
             try {
@@ -57,9 +55,10 @@ constructor(
         }
     }
 
+
     private fun sortLineData() {
-        val overallUrlChart = _response.value?.data?.overallUrlChart
-        if (overallUrlChart != null) {
+        _response.value?.data?.overallUrlChart?.let { overallUrlChart ->
+            // Get entries for January and February
             val data = overallUrlChart
                 .filter { entry ->
                     entry.key.startsWith("2024-01") || entry.key.startsWith("2024-02")
@@ -70,11 +69,32 @@ constructor(
                         count.toFloat()
                     )
                 }
+
+            // Post the data and log
             _lineChartData.postValue(data)
             logThis("Chart data $data")
-        } else {
+
+            // Get the first and last keys from the map
+            val firstDate = overallUrlChart.keys.minOrNull()
+            val lastDate = overallUrlChart.keys.maxOrNull()
+
+            // Format the dates
+            val formattedFirstDate = firstDate?.let { formatDateString(it) } ?: "N/A"
+            val formattedLastDate = lastDate?.let { formatDateString(it) } ?: "N/A"
+
+            // Create the formatted date range
+            val formattedDateRange = "$formattedFirstDate - $formattedLastDate"
+            logThis("Date Range: $formattedDateRange")
+            dateTime.postValue(formattedDateRange)
+        } ?: run {
             logThis("OverallUrlChart data is null")
         }
+    }
+
+    private fun formatDateString(dateString: String): String {
+        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val date = formatter.parse(dateString)
+        return SimpleDateFormat("d MMM", Locale.getDefault()).format(date ?: Date())
     }
 
 
