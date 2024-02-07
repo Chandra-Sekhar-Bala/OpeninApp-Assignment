@@ -7,5 +7,11 @@
     </style>
 
     <style name="Theme.OpeninApp" parent="Base.Theme.OpeninApp" />
-    a
+
+    <style name="OpeninApp.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_openinapp</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="postSplashScreenTheme">@style/Theme.OpeninApp</item>
+    </style>
 </resources>
