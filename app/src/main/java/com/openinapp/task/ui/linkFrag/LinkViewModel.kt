@@ -49,7 +49,8 @@ constructor(
             try {
                 withContext(Dispatchers.IO) {
                     val data = async { linkApi.getLinkData(apiToken) }
-                    _response.postValue(data.await())
+                    val item = data.await()
+                    _response.postValue(item)
                     logThis("Success getting data ${_response.value?.data?.overallUrlChart}")
                 }
                 sortLineData()
@@ -60,7 +61,7 @@ constructor(
         }
     }
 
-
+// Make up the line data upto
     private fun sortLineData() {
         _response.value?.data?.overallUrlChart?.let { overallUrlChart ->
             // Get entries for January and February
