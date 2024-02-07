@@ -6,11 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.data.Entry
 import com.openinapp.task.helper.CONSTANTS
+import com.openinapp.task.helper.LOAD
 import com.openinapp.task.helper.logThis
 import com.openinapp.task.model.LinkResponse
 import com.openinapp.task.repo.network.LinkApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
@@ -27,9 +29,6 @@ constructor(
     @Named(CONSTANTS.API_KEY) private val apiToken: String
 ) : ViewModel() {
 
-    // greet message
-    val greetMessage: String = getGreeting(System.currentTimeMillis())
-
     // response
     private var _response = MutableLiveData<LinkResponse>()
     val response: LiveData<LinkResponse> get() = _response
@@ -40,17 +39,23 @@ constructor(
 
     var dateTime = MutableLiveData<String>()
 
+    private var _loading = MutableLiveData<LOAD>()
+    val loading: LiveData<LOAD> get() = _loading
+
     fun getDataFromInternet() {
+        _loading.value = LOAD.LOADING
         logThis("Starting Engine ....\n Token : $apiToken")
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO) {
-                    _response.postValue(linkApi.getLinkData(apiToken))
+                    val data = async { linkApi.getLinkData(apiToken) }
+                    _response.postValue(data.await())
                     logThis("Success getting data ${_response.value?.data?.overallUrlChart}")
-                    sortLineData()
                 }
+                sortLineData()
             } catch (e: Exception) {
                 logThis(e.message.toString())
+                _loading.value = LOAD.FINISH
             }
         }
     }
@@ -86,8 +91,10 @@ constructor(
             val formattedDateRange = "$formattedFirstDate - $formattedLastDate"
             logThis("Date Range: $formattedDateRange")
             dateTime.postValue(formattedDateRange)
+            _loading.postValue(LOAD.FINISH)
         } ?: run {
             logThis("OverallUrlChart data is null")
+            _loading.value = LOAD.FINISH
         }
     }
 
@@ -99,7 +106,7 @@ constructor(
 
 
     /* Greet message function*/
-    private fun getGreeting(timeInMillis: Long): String {
+    fun getGreeting(timeInMillis: Long = System.currentTimeMillis()): String {
         val dateFormat = SimpleDateFormat("HH", Locale.getDefault())
         return when (dateFormat.format(Date(timeInMillis)).toInt()) {
             in 6..11 -> "Good Morning"

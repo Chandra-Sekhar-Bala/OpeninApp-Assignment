@@ -21,10 +21,11 @@ import com.google.android.material.chip.Chip
 import com.openinapp.task.R
 import com.openinapp.task.databinding.FragmentLinkBinding
 import com.openinapp.task.helper.CONSTANTS
+import com.openinapp.task.helper.LOAD
+import com.openinapp.task.helper.SCREEN
 import com.openinapp.task.helper.logThis
 import com.openinapp.task.model.Link
 import com.openinapp.task.model.LinkResponse
-import com.openinapp.task.model.Screen
 import dagger.hilt.android.AndroidEntryPoint
 import java.net.URLEncoder
 
@@ -60,11 +61,10 @@ class LinkFragment : Fragment() {
         setupOnClickListener()
         observeData()
         setupLineChart()
-        binding.txtGreet.text = viewModel.greetMessage
-
     }
 
     private fun observeData() {
+        binding.txtGreet.text = viewModel.getGreeting()
         viewModel.lineChartData.observe(viewLifecycleOwner) {
             showLineChart(it)
         }
@@ -74,6 +74,25 @@ class LinkFragment : Fragment() {
         }
         viewModel.response.observe(viewLifecycleOwner) {
             showDataOnScreen(it)
+        }
+
+        viewModel.loading.observe(viewLifecycleOwner) {
+            showShimmer(it)
+        }
+
+    }
+
+    private fun showShimmer(it: LOAD) {
+        when (it) {
+            LOAD.LOADING -> {
+                binding.layoutShimmer.root.visibility = View.VISIBLE
+                binding.layoutMain.visibility = View.GONE
+            }
+
+            LOAD.FINISH -> {
+                binding.layoutShimmer.root.visibility = View.GONE
+                binding.layoutMain.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -85,7 +104,7 @@ class LinkFragment : Fragment() {
         rcyData.add(data.data.topLinks)
         rcyData.add(data.data.recentLinks)
         // Setting the TopLink by default
-        setRcyScreen(Screen.TOP)
+        setRcyScreen(SCREEN.TOP)
 
         logThis("Data on UI : $data")
         binding.layoutStats.apply {
@@ -149,7 +168,7 @@ class LinkFragment : Fragment() {
             setChipBackgroundColorResource(R.color.chip_active)
             setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
         }
-        setRcyScreen(if (selectedChipId == chipList[0]) Screen.TOP else Screen.RECENT)
+        setRcyScreen(if (selectedChipId == chipList[0]) SCREEN.TOP else SCREEN.RECENT)
         view?.findViewById<Chip>(otherChipId)?.apply {
             setChipBackgroundColorResource(R.color.white)
             setTextColor(ContextCompat.getColor(requireContext(), R.color.chip_inactive))
@@ -221,11 +240,11 @@ class LinkFragment : Fragment() {
 
     }
 
-    private fun setRcyScreen(pos: Screen) {
+    private fun setRcyScreen(pos: SCREEN) {
         adapter.submitList(
             when (pos) {
-                Screen.TOP -> rcyData[0]
-                Screen.RECENT -> rcyData[1]
+                SCREEN.TOP -> rcyData[0]
+                SCREEN.RECENT -> rcyData[1]
             }
         )
     }

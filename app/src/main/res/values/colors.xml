@@ -7,8 +7,12 @@
     <color name="unselected_tint_color">#999ca0</color>
     <color name="selected_tint_color">#000000</color>
     <color name="light_grey">#d8d8d8</color>
+    <color name="text_grey">#999ca0</color>
     <color name="chip_inactive">#999ca0</color>
     <color name="chip_active">#0e6fff</color>
     <color name="light_green">#e0f1e3</color>
     <color name="line_Chart_bg_color">#1A0BB8E4</color>
+    <color name="shimmer_light">#B6B3B3</color>
+    <color name="shimmer_deep">#615F5F</color>
+    <color name="shimmer_normal">#979696</color>
 </resources>
