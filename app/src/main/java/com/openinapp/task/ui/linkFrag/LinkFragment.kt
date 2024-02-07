@@ -8,8 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.android.material.chip.Chip
 import com.openinapp.task.R
 import com.openinapp.task.databinding.FragmentLinkBinding
@@ -48,10 +55,18 @@ class LinkFragment : Fragment() {
 
         binding.rcyView.adapter = adapter
 
-        viewModel.getDataFromInternet()
         setupOnClickListener()
+        observeData()
+        setupLineChart()
         binding.txtGreet.text = viewModel.greetMessage
 
+
+    }
+
+    private fun observeData() {
+        viewModel.lineChartData.observe(viewLifecycleOwner) {
+            showLineChart(it)
+        }
         viewModel.response.observe(viewLifecycleOwner) { data ->
 
             rcyData.add(data.data.topLinks)
@@ -74,6 +89,28 @@ class LinkFragment : Fragment() {
                     apply()
                 }
             }
+        }
+    }
+
+    private fun showLineChart(entries: List<Entry>?) {
+
+        val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.fade_blue)
+
+        val dataset = LineDataSet(entries, "").apply {
+            color = ContextCompat.getColor(requireContext(), R.color.light_blue)
+            mode = LineDataSet.Mode.HORIZONTAL_BEZIER
+            fillColor = ContextCompat.getColor(requireContext(), R.color.line_Chart_bg_color)
+            setDrawFilled(true)
+            fillDrawable = drawable
+        }
+
+        val dataValue = LineData(dataset).apply {
+        }
+
+        binding.chartLineChart.apply {
+            data = dataValue
+            animateY(4000)
+            invalidate()
         }
     }
 
@@ -106,6 +143,49 @@ class LinkFragment : Fragment() {
         }
     }
 
+    private fun setupLineChart() {
+        val customTypeface = ResourcesCompat.getFont(requireContext(), R.font.figtree_regular)
+        val text_Color = ContextCompat.getColor(requireContext(), R.color.chip_inactive)
+        val gridBgColor = ContextCompat.getColor(
+            requireContext(),
+            android.R.color.transparent
+        )
+        binding.chartLineChart.apply {
+            xAxis.apply {
+                gridColor = gridBgColor
+                textColor = text_Color
+                textSize = 6f
+                typeface = customTypeface
+                position = XAxis.XAxisPosition.BOTTOM
+                setDrawAxisLine(false)
+                setDrawLabels(true)
+                setLabelCount(12, false)
+                setDrawGridLines(false)
+                valueFormatter = MonthValueFormatter()
+            }
+            description.isEnabled = false
+            legend.isEnabled = false
+            isClickable = false
+            axisRight.isEnabled = false
+            axisLeft.setDrawGridLines(false)
+            axisLeft.setDrawAxisLine(false)
+            setPinchZoom(false)
+            isDoubleTapToZoomEnabled = false
+        }
+    }
+
+
+    private inner class MonthValueFormatter : ValueFormatter() {
+        private val monthLabels = arrayOf(
+            "", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        )
+
+        override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+            val index = value.toInt()
+            return if (index in 1..12) monthLabels[index] else ""
+        }
+    }
 
     private fun takeOnWeb() {
         val faqUrl = "https://openinapp.com/faq"
