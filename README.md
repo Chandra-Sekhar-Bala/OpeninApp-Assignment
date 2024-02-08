@@ -46,6 +46,6 @@ Transformed the OpeninApp design into a vibrant Android experience. With Kotlin,
   
 
 ## To-do
-  - LineChar [More accurate]
+  - LineChart [More accurate and appealing]
   -  Dark theme
-  -  Shimmer Blue effect
+  -  Cancelling shimmer Blue effect 
